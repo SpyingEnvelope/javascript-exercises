@@ -1,5 +1,7 @@
 const caesar = function(a, b) {
     let aArray = a.split('');
+    let alphabetArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+      'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
     for (let i = 0; i < aArray.length; i++) {
         if(aArray[i] >= 'A' && aArray[i] <= 'Z' || aArray[i] >= 'a' && aArray[i] <= 'z' ){
@@ -21,7 +23,36 @@ const caesar = function(a, b) {
             replaceLetterCalc = String.fromCharCode(replaceLetterCalc);
             aArray[i] = replaceLetterCalc;
         }
-          else if (replaceLetterCalc < 97){}
+          else if (replaceLetterCalc < 97){
+            let smallALoop = 97 - replaceLetterCalc;
+            replaceLetterCalc = 123 - smallALoop;
+            replaceLetterCalc = String.fromCharCode(replaceLetterCalc);
+            aArray[i] = replaceLetterCalc;
+          }
+          else if(replaceLetterCalc > 122 && replaceLetter >= 97 && replaceLetter <= 122) {
+            lowerZLoop = replaceLetterCalc - 123;
+            if (lowerZLoop >= 26 && replaceLetter >= 97 && replaceLetter <= 122){
+              for (; lowerZLoop >= 26;){
+                let loopCreate = 97 + lowerZLoop;
+                lowerZLoop = loopCreate - 123;
+              } 
+            }
+            replaceLetterCalc = 97 + lowerZLoop;
+            replaceLetterCalc = String.fromCharCode(replaceLetterCalc);
+            aArray[i] = replaceLetterCalc;
+          }
+          else if(replaceLetterCalc > 122 && replaceLetter >= 65 && replaceLetter <= 90){
+            capitalZLoop = replaceLetterCalc - 91;
+            if (capitalZLoop >= 26 && replaceLetter >= 65 && replaceLetter <= 90){
+              for (; capitalZLoop >= 26;){
+                let loopCreate = 65 + capitalZLoop;
+                capitalZLoop = loopCreate - 91;
+              } 
+            }
+            replaceLetterCalc = 65 + capitalZLoop;
+           replaceLetterCalc = String.fromCharCode(replaceLetterCalc);
+            aArray[i] = replaceLetterCalc;
+          }
         };
     };
 
@@ -30,7 +61,7 @@ const caesar = function(a, b) {
 
 }
 
-let a = 'W';
+let a = 'H';
 a = a.charCodeAt();
 console.log(a);
 //a++
