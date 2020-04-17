@@ -1,15 +1,29 @@
 const caesar = function(a, b) {
     let aArray = a.split('');
-    let alphabetArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
-      'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
     for (let i = 0; i < aArray.length; i++) {
         if(aArray[i] >= 'A' && aArray[i] <= 'Z' || aArray[i] >= 'a' && aArray[i] <= 'z' ){
           let replaceLetter = aArray[i].charCodeAt();
           let replaceLetterCalc = replaceLetter + b;
-          if(replaceLetterCalc > 65 && replaceLetterCalc < 90 || replaceLetterCalc > 97 && replaceLetterCalc < 122) {
+          if(replaceLetterCalc < 97 && replaceLetter >= 97 && replaceLetter <= 122 || replaceLetterCalc < 65 && replaceLetter >= 97 && replaceLetter <= 122){
+            for(;replaceLetterCalc < 97;){
+              let negativeShift2 = 97 - replaceLetterCalc;
+              replaceLetterCalc = 123 - negativeShift2;
+            }
+            replaceLetterCalc = String.fromCharCode(replaceLetterCalc);
+            aArray[i] = replaceLetterCalc;
+          }
+          else if(replaceLetterCalc > 65 && replaceLetterCalc < 90 || replaceLetterCalc > 97 && replaceLetterCalc < 122) {
               replaceLetterCalc = String.fromCharCode(replaceLetterCalc);
               aArray[i] = replaceLetterCalc;
+        }
+        else if(replaceLetterCalc < 65 && replaceLetter >= 65 && replaceLetter <= 90) {
+          for (;replaceLetterCalc < 65;){
+            let negativeShift = 65 - replaceLetterCalc;
+            replaceLetterCalc = 91 - negativeShift;
+          }
+          replaceLetterCalc = String.fromCharCode(replaceLetterCalc);
+          aArray[i] = replaceLetterCalc;
         }
           else if (replaceLetterCalc < 65){
             let aLoop = 65 - replaceLetterCalc;
@@ -37,7 +51,7 @@ const caesar = function(a, b) {
                 lowerZLoop = loopCreate - 123;
               } 
             }
-            replaceLetterCalc = 97 + lowerZLoop;
+            replaceLetterCalc  = 97 + lowerZLoop;
             replaceLetterCalc = String.fromCharCode(replaceLetterCalc);
             aArray[i] = replaceLetterCalc;
           }
