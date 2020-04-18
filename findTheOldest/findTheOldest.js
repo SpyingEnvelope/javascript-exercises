@@ -1,20 +1,32 @@
 let findTheOldest = function(people) {
-    
-  let tester = [0, 0, 0];
 
-  for(let i = 0; i < 3; i++){
-      tester[i] = people[i];
-  };
-  
-  let testerSort = tester.sort(function(a, b){
-      if((a.yearOfDeath - a.yearOfBirth) > (b.yearOfDeath - b.yearOfBirth)){
-          return -1;
-      } else {
-          return 1;
-      }
-  })
+    let isAlive = people.some(function(person){
+        const currentYear = (new Date()).getFullYear();
+        if(people.yearOfDeath == undefined){
+            return true;
+        }
+    })
 
-  return tester[0];
+        people.sort(function(a, b){
+        if((a.yearOfDeath - a.yearOfBirth) > (b.yearOfDeath - b.yearOfBirth)){
+            return -1;
+        } else {
+            return 1;
+        }
+    })
+
+    if(isAlive === true){
+        people[0].yearOfDeath = (new Date()).getFullYear();
+        people.sort(function(a, b){
+            if((a.yearOfDeath - a.yearOfBirth) > (b.yearOfDeath - b.yearOfBirth)){
+                return -1;
+            } else {
+                return 1;
+            }
+        })
+    }
+
+    return people[0];
 }
 
 module.exports = findTheOldest
